@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yakaza — Light of Islam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream:        #FDFBF4;
+            --white:        #FFFFFF;
+            --green-dark:   #1A5C38;
+            --green-medium: #2E7D52;
+            --gold:         #C9A84C;
+            --gold-light:   #F0D878;
+            --gold-dark:    #9A7830;
+            --text-dark:    #1C1C1C;
+            --text-medium:  #4A4A4A;
+            --text-light:   #787878;
+            --border:       #E0D4B0;
+            --section-alt:  #F5F0E8;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* ───────────────────── NAVIGATION ───────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(253, 251, 244, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .nav-logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--green-dark); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--green-dark);
+            transition: 0.3s;
+        }
+
+        /* ───────────────────── HERO ───────────────────── */
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                160deg,
+                rgba(26, 92, 56, 0.60) 0%,
+                rgba(0, 0, 0, 0.38) 50%,
+                rgba(154, 120, 48, 0.45) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+            padding: 2rem;
+            animation: fadeInUp 1.3s ease;
+        }
+
+        .hero-bismillah {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: var(--gold-light);
+            margin-bottom: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+            margin-bottom: 0.3rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: rgba(255,255,255,0.85);
+            font-style: italic;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 2rem;
+        }
+
+        .hero-arabic {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.4rem, 3.2vw, 2rem);
+            color: var(--gold-light);
+            direction: rtl;
+            line-height: 1.9;
+            margin-bottom: 0.7rem;
+        }
+
+        .hero-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2.2vw, 1.35rem);
+            color: #fff;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-ref {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2.2s infinite;
+        }
+        .hero-scroll a {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.72rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .scroll-arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid rgba(255,255,255,0.6);
+            border-bottom: 2px solid rgba(255,255,255,0.6);
+            transform: rotate(45deg);
+        }
+
+        /* ───────────────────── SHARED SECTION STYLES ───────────────────── */
+        section { padding: 5.5rem 2rem; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--gold-light);
+            color: var(--green-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--green-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 0.97rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.2rem 0 1.6rem;
+        }
+        .ornament-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold));
+        }
+        .ornament-line.right {
+            background: linear-gradient(to left, transparent, var(--gold));
+        }
+        .ornament-diamond {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        /* ───────────────────── FIVE KALIMAHS ───────────────────── */
+        #kalimahs { background: var(--white); }
+
+        .kalimahs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .kalimah-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .kalimah-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--green-dark), var(--gold));
+        }
+        .kalimah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+        }
+
+        .kalimah-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            background: var(--green-dark);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 0.9rem;
+        }
+
+        .kalimah-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        .kalimah-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.55rem;
+            color: var(--text-dark);
+            direction: rtl;
+            text-align: right;
+            line-height: 2.1;
+            margin-bottom: 1.2rem;
+            padding: 1rem 1.1rem;
+            background: var(--section-alt);
+            border-radius: 8px;
+            border-right: 3px solid var(--gold);
+        }
+
+        .kalimah-transliteration {
+            font-style: italic;
+            color: var(--green-medium);
+            font-size: 0.92rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .kalimah-meaning {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+        .kalimah-meaning strong { color: var(--text-dark); }
+
+        /* ───────────────────── SURAHS ───────────────────── */
+        #surahs { background: var(--section-alt); }
+
+        .surahs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .surah-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .surah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+        }
+
+        .surah-header {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-medium) 100%);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .surah-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        .surah-info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.72rem;
+            letter-spacing: 1.2px;
+        }
+        .surah-number {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            opacity: 0.75;
+            flex-shrink: 0;
+        }
+
+        .surah-body { padding: 1.5rem; }
+
+        .surah-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            direction: rtl;
+            text-align: right;
+            line-height: 2.2;
+            margin-bottom: 1.2rem;
+            padding: 1rem 1.1rem;
+            background: var(--section-alt);
+            border-radius: 8px;
+            border-right: 3px solid var(--gold);
+        }
+
+        .surah-transliteration {
+            font-style: italic;
+            color: var(--green-medium);
+            font-size: 0.88rem;
+            margin-bottom: 1rem;
+            line-height: 1.85;
+        }
+
+        .surah-translation {
+            color: var(--text-medium);
+            font-size: 0.88rem;
+            line-height: 1.85;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .label {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ───────────────────── FOOTER ───────────────────── */
+        footer {
+            background: var(--green-dark);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 3.5rem 2rem;
+        }
+
+        .footer-bismillah {
+            font-family: 'Amiri', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--gold-light);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-dua-arabic {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.9);
+            direction: rtl;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-dua-trans {
+            font-style: italic;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 2rem;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 1.5rem;
+        }
+
+        .footer-site-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ───────────────────── ANIMATIONS ───────────────────── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0);   }
+            50%       { transform: translateX(-50%) translateY(9px); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ───────────────────── RESPONSIVE ───────────────────── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 64px; left: 0; right: 0;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                border-bottom: 1px solid var(--border);
+                gap: 1.2rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .kalimahs-grid, .surahs-grid { grid-template-columns: 1fr; }
+            .hero-bg { background-attachment: scroll; }
+            section { padding: 3.5rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════ NAVIGATION ════════════════ -->
+<nav>
+    <a href="#hero" class="nav-logo">Yakaza <span>✦</span></a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#hero"     onclick="closeMenu()">Home</a></li>
+        <li><a href="#kalimahs" onclick="closeMenu()">Five Kalimahs</a></li>
+        <li><a href="#surahs"   onclick="closeMenu()">Surahs</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <h1 class="hero-title">Yakaza</h1>
+        <p class="hero-subtitle">Light of Islam</p>
+        <div class="hero-divider"></div>
+        <p class="hero-arabic">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</p>
+        <p class="hero-quote">"Verily, in the remembrance of Allah do hearts find rest."</p>
+        <p class="hero-ref">— Surah Ar-Ra'd &nbsp;·&nbsp; 13:28</p>
+    </div>
+    <div class="hero-scroll">
+        <a href="#kalimahs">
+            <div class="scroll-arrow"></div>
+        </a>
+    </div>
+</section>
+
+<!-- ════════════════ FIVE KALIMAHS ════════════════ -->
+<section id="kalimahs">
+    <div class="section-header">
+        <span class="section-tag">Foundation of Faith</span>
+        <h2 class="section-title">The Five Kalimahs</h2>
+        <div class="ornament">
+            <div class="ornament-line"></div>
+            <div class="ornament-diamond"></div>
+            <div class="ornament-line right"></div>
+        </div>
+        <p class="section-subtitle">The five sacred declarations that form the spiritual pillars of a Muslim's faith and daily remembrance.</p>
+    </div>
+
+    <div class="kalimahs-grid">
+
+        <!-- 1st Kalimah -->
+        <div class="kalimah-card fade-in">
+            <div class="kalimah-number">1</div>
+            <div class="kalimah-name">First Kalimah &mdash; Tayyibah &nbsp;(The Pure Word)</div>
+            <div class="kalimah-arabic">لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَّسُولُ اللَّهِ</div>
+            <div class="kalimah-transliteration">Laa ilaaha illallaahu Muhammadur-Rasoolullah</div>
+            <div class="kalimah-meaning"><strong>Meaning:</strong> There is none worthy of worship except Allah; Muhammad is the Messenger of Allah.</div>
+        </div>
+
+        <!-- 2nd Kalimah -->
+        <div class="kalimah-card fade-in">
+            <div class="kalimah-number">2</div>
+            <div class="kalimah-name">Second Kalimah &mdash; Shahadat &nbsp;(The Testimony)</div>
+            <div class="kalimah-arabic">أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</div>
+            <div class="kalimah-transliteration">Ash-hadu al-laa ilaaha illallaahu wahdahu laa shareeka lahu wa ash-hadu anna Muhammadan 'abduhu wa Rasooluh</div>
+            <div class="kalimah-meaning"><strong>Meaning:</strong> I bear witness that there is none worthy of worship except Allah, alone without partner, and I bear witness that Muhammad is His servant and Messenger.</div>
+        </div>
+
+        <!-- 3rd Kalimah -->
+        <div class="kalimah-card fade-in">
+            <div class="kalimah-number">3</div>
+            <div class="kalimah-name">Third Kalimah &mdash; Tamjeed &nbsp;(The Glorification)</div>
+            <div class="kalimah-arabic">سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ</div>
+            <div class="kalimah-transliteration">Subhaanallaahi walhamdu lillaahi wa laa ilaaha illallaahu wallaahu akbar. Wa laa hawla wa laa quwwata illaa billaahil-'aliyyil-'azeem</div>
+            <div class="kalimah-meaning"><strong>Meaning:</strong> Glory be to Allah, and all praise is for Allah, and there is none worthy of worship except Allah, and Allah is the Greatest. And there is no power and no strength except with Allah, the Most High, the Most Great.</div>
+        </div>
+
+        <!-- 4th Kalimah -->
+        <div class="kalimah-card fade-in">
+            <div class="kalimah-number">4</div>
+            <div class="kalimah-name">Fourth Kalimah &mdash; Tawheed &nbsp;(Oneness of Allah)</div>
+            <div class="kalimah-arabic">لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٌّ لَّا يَمُوتُ أَبَدًا ذُو الْجَلَالِ وَالْإِكْرَامِ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ</div>
+            <div class="kalimah-transliteration">Laa ilaaha illallaahu wahdahu laa shareeka lahu lahul-mulku wa lahul-hamdu yuhyee wa yumeetu wa huwa hayyun laa yamootu abadaa. Dhul-jalaali wal-ikraam. Biyadihil-khayr. Wa huwa 'alaa kulli shay'in qadeer</div>
+            <div class="kalimah-meaning"><strong>Meaning:</strong> There is none worthy of worship except Allah, alone without partner. To Him belongs all sovereignty and all praise. He gives life and causes death, and He is Ever-Living, never dying. Possessor of Majesty and Honor. In His hand is all goodness, and He has power over all things.</div>
+        </div>
+
+        <!-- 5th Kalimah -->
+        <div class="kalimah-card fade-in">
+            <div class="kalimah-number">5</div>
+            <div class="kalimah-name">Fifth Kalimah &mdash; Astaghfar &nbsp;(Seeking Forgiveness)</div>
+            <div class="kalimah-arabic">أَسْتَغْفِرُ اللَّهَ رَبِّي مِن كُلِّ ذَنبٍ أَذْنَبْتُهُ عَمَدًا أَوْ خَطَأً سِرًّا أَوْ عَلَانِيَةً وَأَتُوبُ إِلَيْهِ مِنَ الذَّنبِ الَّذِي أَعْلَمُ وَمِنَ الذَّنبِ الَّذِي لَا أَعْلَمُ إِنَّكَ أَنتَ عَلَّامُ الْغُيُوبِ وَسَتَّارُ الْعُيُوبِ وَغَفَّارُ الذُّنُوبِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ</div>
+            <div class="kalimah-transliteration">Astaghfirullaaha rabbi min kulli dhambin adhnabtuhu 'amadan aw khata'an sirran aw 'alaaniyyatan wa atoobu ilayhi min adh-dhambi alladhee a'lamu wa min adh-dhambi alladhee laa a'lamu. Innaka anta 'allaamul-ghuyoobi wa sattaaril-'uyoobi wa ghaffaarudh-dhunoob. Wa laa hawla wa laa quwwata illaa billaahil-'aliyyil-'azeem</div>
+            <div class="kalimah-meaning"><strong>Meaning:</strong> I seek forgiveness from Allah, my Lord, for every sin I committed knowingly or unknowingly, secretly or openly. I turn to Him in repentance from every sin I know and every sin I do not know. Surely You are the Knower of the hidden, the Concealer of faults, and the Forgiver of sins. And there is no power and no strength except with Allah, the Most High, the Most Great.</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ════════════════ IMPORTANT SURAHS ════════════════ -->
+<section id="surahs">
+    <div class="section-header">
+        <span class="section-tag">Words of Allah</span>
+        <h2 class="section-title">Important Surahs</h2>
+        <div class="ornament">
+            <div class="ornament-line"></div>
+            <div class="ornament-diamond"></div>
+            <div class="ornament-line right"></div>
+        </div>
+        <p class="section-subtitle">Essential chapters from the Holy Quran — recited daily for guidance, protection, and nearness to Allah.</p>
+    </div>
+
+    <div class="surahs-grid">
+
+        <!-- Al-Fatiha -->
+        <div class="surah-card fade-in">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <h3>Al-Fatiha</h3>
+                    <p>SURAH 1 &nbsp;·&nbsp; THE OPENING &nbsp;·&nbsp; 7 VERSES</p>
+                </div>
+                <div class="surah-number">١</div>
+            </div>
+            <div class="surah-body">
+                <span class="label">Arabic</span>
+                <div class="surah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾</div>
+                <span class="label">Transliteration</span>
+                <div class="surah-transliteration">Bismillaahir-Rahmaanir-Raheem. Alhamdu lillaahi Rabbil-'aalameen. Ar-Rahmaanir-Raheem. Maaliki Yawmid-Deen. Iyyaaka na'budu wa Iyyaaka nasta'een. Ihdinas-Siraatal-Mustaqeem. Siraatal-latheena an'amta 'alayhim ghayril-maghdoobi 'alayhim wa lad-daaalleen.</div>
+                <div class="surah-translation">
+                    <span class="label">Translation</span>
+                    In the name of Allah, the Most Gracious, the Most Merciful. All praise is due to Allah, Lord of all the worlds — the Most Gracious, the Most Merciful — Master of the Day of Judgment. You alone we worship, and You alone we ask for help. Guide us to the straight path: the path of those upon whom You have bestowed favor, not of those who have evoked anger or of those who are astray.
+                </div>
+            </div>
+        </div>
+
+        <!-- Ayatul Kursi -->
+        <div class="surah-card fade-in">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <h3>Ayatul Kursi</h3>
+                    <p>SURAH 2:255 &nbsp;·&nbsp; THE THRONE VERSE</p>
+                </div>
+                <div class="surah-number">٢٥٥</div>
+            </div>
+            <div class="surah-body">
+                <span class="label">Arabic</span>
+                <div class="surah-arabic">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ</div>
+                <span class="label">Transliteration</span>
+                <div class="surah-transliteration">Allaahu laa ilaaha illaa Huwal-Hayyul-Qayyoom. Laa ta'khudhuhu sinatun wa laa nawm. Lahoo maa fis-samaawaati wa maa fil-ard. Man-dhal-ladhee yashfa'u 'indahoo illaa bi-idhnih. Ya'lamu maa bayna aydeehim wa maa khalfahum. Wa laa yuheetoona bishai'im-min 'ilmihee illaa bimaa shaa'. Wasi'a kursiyyuhus-samaawaati wal-ard. Wa laa ya'ooduhoo hifzuhumaa. Wa Huwal-'Aliyyul-'Azeem.</div>
+                <div class="surah-translation">
+                    <span class="label">Translation</span>
+                    Allah — there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.
+                </div>
+            </div>
+        </div>
+
+        <!-- Al-Ikhlas -->
+        <div class="surah-card fade-in">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <h3>Al-Ikhlas</h3>
+                    <p>SURAH 112 &nbsp;·&nbsp; SINCERITY &nbsp;·&nbsp; 4 VERSES</p>
+                </div>
+                <div class="surah-number">١١٢</div>
+            </div>
+            <div class="surah-body">
+                <span class="label">Arabic</span>
+                <div class="surah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾</div>
+                <span class="label">Transliteration</span>
+                <div class="surah-transliteration">Bismillaahir-Rahmaanir-Raheem. Qul huwallaahu ahad. Allaahus-samad. Lam yalid wa lam yoolad. Wa lam yakul-lahoo kufuwan ahad.</div>
+                <div class="surah-translation">
+                    <span class="label">Translation</span>
+                    In the name of Allah, the Most Gracious, the Most Merciful. Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born. Nor is there to Him any equivalent.
+                </div>
+            </div>
+        </div>
+
+        <!-- Al-Falaq -->
+        <div class="surah-card fade-in">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <h3>Al-Falaq</h3>
+                    <p>SURAH 113 &nbsp;·&nbsp; THE DAYBREAK &nbsp;·&nbsp; 5 VERSES</p>
+                </div>
+                <div class="surah-number">١١٣</div>
+            </div>
+            <div class="surah-body">
+                <span class="label">Arabic</span>
+                <div class="surah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾</div>
+                <span class="label">Transliteration</span>
+                <div class="surah-transliteration">Bismillaahir-Rahmaanir-Raheem. Qul a'oodhu bi-Rabbil-falaq. Min sharri maa khalaq. Wa min sharri ghaasiqin idhaa waqab. Wa min sharrin-naffaathaati fil-'uqad. Wa min sharri haasidin idhaa hasad.</div>
+                <div class="surah-translation">
+                    <span class="label">Translation</span>
+                    In the name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge in the Lord of daybreak — from the evil of that which He created, and from the evil of darkness when it settles, and from the evil of those who blow on knots, and from the evil of an envier when he envies.
+                </div>
+            </div>
+        </div>
+
+        <!-- An-Nas -->
+        <div class="surah-card fade-in">
+            <div class="surah-header">
+                <div class="surah-info">
+                    <h3>An-Nas</h3>
+                    <p>SURAH 114 &nbsp;·&nbsp; MANKIND &nbsp;·&nbsp; 6 VERSES</p>
+                </div>
+                <div class="surah-number">١١٤</div>
+            </div>
+            <div class="surah-body">
+                <span class="label">Arabic</span>
+                <div class="surah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾</div>
+                <span class="label">Transliteration</span>
+                <div class="surah-transliteration">Bismillaahir-Rahmaanir-Raheem. Qul a'oodhu bi-Rabbin-naas. Malikin-naas. Ilaahin-naas. Min sharril-waswaasil-khannaas. Alladhee yuwaswisu fee sudoorin-naas. Minal-jinnati wan-naas.</div>
+                <div class="surah-translation">
+                    <span class="label">Translation</span>
+                    In the name of Allah, the Most Gracious, the Most Merciful. Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind — from the evil of the retreating whisperer who whispers in the breasts of mankind, from among the jinn and mankind.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer>
+    <div class="footer-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="footer-dua-arabic">رَبَّنَا تَقَبَّلْ مِنَّا ۖ إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ</div>
+    <div class="footer-dua-trans">"Our Lord, accept this from us. Indeed, You are the Hearing, the Knowing." &mdash; Quran 2:127</div>
+    <div class="footer-divider"></div>
+    <div class="footer-site-title">Yakaza &mdash; Light of Islam</div>
+    <div class="footer-copy">May Allah guide us all to the straight path. &nbsp;Ameen.</div>
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('navLinks').classList.remove('open');
+    }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('navLinks');
+        const ham = document.getElementById('hamburger');
+        if (!nav.contains(e.target) && !ham.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+</script>
+
+</body>
+</html>
